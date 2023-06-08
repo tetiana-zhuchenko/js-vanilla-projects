@@ -16,6 +16,8 @@ let editID = ''
 // submit form
 form.addEventListener('submit', addItem)
 
+// clear items
+clearBtn.addEventListener('click', clearItems)
 // ****** FUNCTIONS **********
 function addItem(e) {
   e.preventDefault()
@@ -44,6 +46,7 @@ function addItem(e) {
 
     // add to local storage
     addToLocalStorage(id, value)
+
     // set back to default
     setBackToDefault()
   } else if (value && editFlag) {
@@ -63,6 +66,20 @@ function displayAlert(text, action) {
     alert.textContent = ''
     alert.classList.remove(`alert-${action}`)
   }, 1000)
+}
+
+function clearItems() {
+  const items = document.querySelectorAll('.grocery-item')
+  console.log(items)
+  if (items.length > 0) {
+    items.forEach((item) => {
+      list.removeChild(item)
+    })
+  }
+  container.classList.remove('show-container')
+  displayAlert('empty list', 'danger')
+  setBackToDefault()
+  // localStorage.removeItem('list')
 }
 
 // set back to default
