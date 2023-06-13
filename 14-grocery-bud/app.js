@@ -18,6 +18,7 @@ form.addEventListener('submit', addItem)
 
 // clear items
 clearBtn.addEventListener('click', clearItems)
+
 // ****** FUNCTIONS **********
 function addItem(e) {
   e.preventDefault()
@@ -39,6 +40,11 @@ function addItem(e) {
   </button>
 </div>`
 
+    const deleteBtn = element.querySelector('.delete-btn')
+    const editBtn = element.querySelector('.edit-btn')
+    deleteBtn.addEventListener('click', deleteItem)
+    editBtn.addEventListener('click', editItem)
+    // append child
     list.appendChild(element)
     displayAlert('item added to the list', 'success')
     // show container
@@ -82,6 +88,21 @@ function clearItems() {
   // localStorage.removeItem('list')
 }
 
+// delete function
+function deleteItem(e) {
+  const element = e.currentTarget.parentElement.parentElement
+  list.removeChild(element)
+  if (!list.children.length) {
+    container.classList.remove('show-container')
+  }
+
+  displayAlert('item removed', 'danger')
+  setBackToDefault()
+}
+// edit function
+function editItem() {
+  console.log('edited item')
+}
 // set back to default
 function setBackToDefault() {
   grocery.value = ''
@@ -89,6 +110,7 @@ function setBackToDefault() {
   editID = ''
   submitBtn.textContent = 'submit'
 }
+
 // ****** LOCAL STORAGE **********
 function addToLocalStorage(id, value) {
   console.log('added to local storage')
