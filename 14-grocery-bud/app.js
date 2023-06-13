@@ -30,7 +30,7 @@ function addItem(e) {
     const attr = document.createAttribute('data-id')
     attr.value = id
     element.setAttributeNode(attr)
-    element.innerHTML = `<p class="title">item</p>
+    element.innerHTML = `<p class="title">${value}</p>
 <div class="btn-container">
   <button type="button" class="edit-btn">
     <i class="fas fa-edit"></i>
@@ -56,6 +56,11 @@ function addItem(e) {
     // set back to default
     setBackToDefault()
   } else if (value && editFlag) {
+    editElement.innerHTML = value
+    displayAlert('value edited', 'success')
+    // edit local storage
+    editLocalStorage(editID, value)
+    setBackToDefault()
     console.log('editing')
   } else {
     displayAlert('please enter value', 'danger')
@@ -103,8 +108,16 @@ function deleteItem(e) {
   // removeFromLocalStorage(id)
 }
 // edit function
-function editItem() {
-  console.log('edited item')
+function editItem(e) {
+  const element = e.currentTarget.parentElement.parentElement
+  // set edit item
+  editElement = e.currentTarget.parentElement.previousElementSibling
+  // set form value
+  grocery.value = editElement.innerHTML
+  editFlag = true
+  editID = element.dataset.id
+  submitBtn.textContent = 'edit'
+  console.log(editElement)
 }
 // set back to default
 function setBackToDefault() {
@@ -120,4 +133,7 @@ function addToLocalStorage(id, value) {
 }
 
 function removeFromLocalStorage(id) {}
+function editLocalStorage(id, value) {
+  console.log('edit local storage')
+}
 // ****** SETUP ITEMS **********
