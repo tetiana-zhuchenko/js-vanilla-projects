@@ -91,6 +91,7 @@ function clearItems() {
 // delete function
 function deleteItem(e) {
   const element = e.currentTarget.parentElement.parentElement
+  const id = element.dataset.id
   list.removeChild(element)
   if (!list.children.length) {
     container.classList.remove('show-container')
@@ -98,6 +99,8 @@ function deleteItem(e) {
 
   displayAlert('item removed', 'danger')
   setBackToDefault()
+  // remove from local storage
+  // removeFromLocalStorage(id)
 }
 // edit function
 function editItem() {
@@ -115,4 +118,6 @@ function setBackToDefault() {
 function addToLocalStorage(id, value) {
   console.log('added to local storage')
 }
+
+function removeFromLocalStorage(id) {}
 // ****** SETUP ITEMS **********
